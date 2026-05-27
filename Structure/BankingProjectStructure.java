@@ -6,7 +6,7 @@ public class BankingProjectStructure{
 	public static void main(String args[]){
 		SampleFrame sf= new SampleFrame();
 		sf.setVisible(true);
-		sf.setDefaultCloseOperation(0);	
+		sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 }
 
@@ -16,7 +16,7 @@ class SampleFrame extends JFrame{
 		Dimension srcSize= kit.getScreenSize();
 		int w= srcSize.width;
 		int h= srcSize.height;
-		setSize(400,600);
+		setSize(450,600);
 		setLocation(w/6, h/8);
 		setResizable(false);
 		setTitle("Structure");
@@ -81,23 +81,46 @@ class FramePanel extends JPanel{
 		DefaultMutableTreeNode transactionDAO=new DefaultMutableTreeNode("TransactionDAO.java");
 		DefaultMutableTreeNode adminDAO=new DefaultMutableTreeNode("AdminDAO.java");
 
+		databases.add(dbConnection);
+		databases.add(accountDAO);
+		databases.add(transactionDAO);
+		databases.add(adminDAO);
+
 		DefaultMutableTreeNode generateAccountNumber=new DefaultMutableTreeNode("GenerateAccountNumber.java");
 		DefaultMutableTreeNode dateUtil=new DefaultMutableTreeNode("DateUtil.java");
 		DefaultMutableTreeNode messageUtil=new DefaultMutableTreeNode("MessageUtil.java");
 		DefaultMutableTreeNode passwordEncryption=new DefaultMutableTreeNode("PasswordEncryption.java");
 		DefaultMutableTreeNode validation=new DefaultMutableTreeNode("Validation.java");
 
+		utility.add(generateAccountNumber);
+		utility.add(dateUtil);
+		utility.add(messageUtil);
+		utility.add(passwordEncryption);
+		utility.add(validation);
+
 		DefaultMutableTreeNode invalidAmountException=new DefaultMutableTreeNode("InvalidAmountException.java");
 		DefaultMutableTreeNode accountNotFoundException=new DefaultMutableTreeNode("AccountNotFoundException.java");
 		DefaultMutableTreeNode insufficientBalanceException=new DefaultMutableTreeNode("InsufficientBalanceException.java");
 		DefaultMutableTreeNode invalidUserException=new DefaultMutableTreeNode("InvalidUserException.java");
 
+		exception.add(invalidAmountException);
+		exception.add(accountNotFoundException);
+		exception.add(insufficientBalanceException);
+		exception.add(invalidUserException);
+
 		DefaultMutableTreeNode icons=new DefaultMutableTreeNode("icons/");
 		DefaultMutableTreeNode images=new DefaultMutableTreeNode("images/");
 		DefaultMutableTreeNode background=new DefaultMutableTreeNode("background/");
+		
+		assets.add(icons);
+		assets.add(images);
+		assets.add(background);
 
 		DefaultMutableTreeNode mysqlConnector=new DefaultMutableTreeNode("mysql-connector.jar");
 		DefaultMutableTreeNode bankingSql=new DefaultMutableTreeNode("banking.sql");
+		
+		lib.add(mysqlConnector);
+		database.add(bankingSql);
 
 		bankSystem.add(src);
 		bankSystem.add(lib);
@@ -140,32 +163,13 @@ class FramePanel extends JPanel{
 		service.add(transactionService);
 		service.add(bankService);
 		service.add(validationService);
-	
-		databases.add(dbConnection);
-		databases.add(accountDAO);
-		databases.add(transactionDAO);
-		databases.add(adminDAO);
-
-		utility.add(generateAccountNumber);
-		utility.add(dateUtil);
-		utility.add(messageUtil);
-		utility.add(passwordEncryption);
-		utility.add(validation);
-
-		exception.add(invalidAmountException);
-		exception.add(accountNotFoundException);
-		exception.add(insufficientBalanceException);
-		exception.add(invalidUserException);
-
-		assets.add(icons);
-		assets.add(images);
-		assets.add(background);
-		
-		lib.add(mysqlConnector);
-		database.add(bankingSql);
 
 		JTree tree=new JTree(bankSystem);
-		tree.setBounds(10,15,200,500);
-		add(tree);
+		tree.setBounds(10,15,400,500);
+		//add(tree);
+
+		JScrollPane sp=new JScrollPane(tree);
+		sp.setBounds(10,15,400,500);
+		add(sp);
 	}   
 }
